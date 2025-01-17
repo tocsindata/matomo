@@ -273,7 +273,7 @@
         "MainMetrics": "Tärkeimmät metriikat",
         "ManagePlugins": "Hallitse lisäosia",
         "Matches": "Osumat",
-        "MatomoIsACollaborativeProjectYouCanContributeAndDonateNextRelease": "%1$sMatomo%2$s, aiemmalta nimeltään Piwik, on yhteisöllinen projekti, jonka ovat toteuttaneet %7$sMatomo-tiimin%8$s jäsenet ja lukuisat osallistujat eri puolilta maailmaa. <br/> Jos pidät Matomosta, voit auttaa: %3$sOsallistu Matomo-yhteisöön%4$s tai %5$slahjoita nyt%6$s rahoittaaksesi seuraavaa Matomo-julkaisua.",
+        "MatomoIsACollaborativeProjectYouCanContributeAndDonateNextRelease": "%1$sMatomo%2$s, aiemmalta nimeltään Piwik, on yhteisöllinen projekti, jonka ovat toteuttaneet %7$sMatomo-tiimin%8$s jäsenet ja lukuisat osallistujat eri puolilta maailmaa. <br> Jos pidät Matomosta, voit auttaa: %3$sOsallistu Matomo-yhteisöön%4$s tai %5$slahjoita nyt%6$s rahoittaaksesi seuraavaa Matomo-julkaisua!",
         "Measurable": "Mitattava",
         "MeasurableId": "Mitattava tunniste",
         "Measurables": "Mitattavat",
