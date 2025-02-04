@@ -1490,6 +1490,8 @@ var AjaxHelper_AjaxHelper = /*#__PURE__*/function () {
 
     AjaxHelper_defineProperty(this, "abortController", null);
 
+    AjaxHelper_defineProperty(this, "abortable", true);
+
     AjaxHelper_defineProperty(this, "defaultParams", ['idSite', 'period', 'date', 'segment']);
 
     AjaxHelper_defineProperty(this, "resolveWithHelper", false);
@@ -1726,7 +1728,10 @@ var AjaxHelper_AjaxHelper = /*#__PURE__*/function () {
       }
 
       this.requestHandle = this.buildAjaxCall();
-      window.globalAjaxQueue.push(this.requestHandle);
+
+      if (this.abortable) {
+        window.globalAjaxQueue.push(this.requestHandle);
+      }
 
       if (this.abortController) {
         this.abortController.signal.addEventListener('abort', function () {
@@ -1812,7 +1817,9 @@ var AjaxHelper_AjaxHelper = /*#__PURE__*/function () {
         complete: this.completeCallback,
         headers: this.headers ? this.headers : undefined,
         error: function errorCallback() {
-          window.globalAjaxQueue.active -= 1;
+          if (self.abortable) {
+            window.globalAjaxQueue.active -= 1;
+          }
 
           if (self.errorCallback) {
             for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -1881,7 +1888,9 @@ var AjaxHelper_AjaxHelper = /*#__PURE__*/function () {
             _this3.callback(response, status, request);
           }
 
-          window.globalAjaxQueue.active -= 1;
+          if (self.abortable) {
+            window.globalAjaxQueue.active -= 1;
+          }
 
           if (Matomo_Matomo.ajaxRequestFinished) {
             Matomo_Matomo.ajaxRequestFinished();
@@ -2102,6 +2111,10 @@ var AjaxHelper_AjaxHelper = /*#__PURE__*/function () {
 
       if (options.returnResponseObject) {
         helper.resolveWithHelper = true;
+      }
+
+      if (options.abortable === false) {
+        helper.abortable = false;
       }
 
       return helper.send().then(function (result) {
@@ -6494,7 +6507,8 @@ var SitesStore_SitesStore = /*#__PURE__*/function () {
           pattern: term,
           sitesToExclude: sitesToExclude
         }, {
-          abortController: _this3.currentRequestAbort
+          abortController: _this3.currentRequestAbort,
+          abortable: false
         });
       }).then(function (response) {
         if (response) {
